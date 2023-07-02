@@ -23,7 +23,10 @@ const LoginComponent = () => {
     axios
       .post(`${process.env.REACT_APP_API}/login`, { username, password })
       .then((res) => {
-        authenticate(res, () => navigate("/create"));
+        authenticate(res, () => {
+          window.location.reload(false);
+          navigate("/create");
+        });
       })
       .catch((err) => {
         Swal.fire("ERROR!", err.response.data.error, "error");
